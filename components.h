@@ -87,7 +87,7 @@ private:
 class CPoints : public QGraphicsPixmapItem
 {
 public:
-    CBullet(Ecolor eColor, QGraphicsItem* pParent = nullptr);
+    CPoints(Ecolor eColor, QGraphicsItem* pParent = nullptr);
     void increaseScore();
     void decreaseScore();
     void decreaseHealth();
@@ -102,14 +102,6 @@ private:
     int m_nScore = 0;
 
 };
-
-
-
-
-
-
-
-
 
 
 
