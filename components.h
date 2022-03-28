@@ -25,7 +25,7 @@ public:
     CCannon(EColor eColor, QGraphicsItem* pParent = nullptr);
     void shoot();
     EColor getColor() const;
-    vois setColor(EColor eColor);
+    void setColor(EColor eColor);
 
 signals:
     void sigIncreaseScore();
@@ -37,12 +37,12 @@ private:
 
 /*******************************************************************/
 
-class CAlien : public QObject, public QGraphicsPixmapItemPrivate
+class CAlien : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 
 public :
-    CAlien(Ecolor eColor, QGraphicsItem* pParent = nullptr);
+    CAlien(EColor eColor, QGraphicsItem* pParent = nullptr);
     EColor getColor() const;
     void setColor(EColor eColor);
 
@@ -65,7 +65,7 @@ class CBullet : public QObject, public QGraphicsItem
     Q_OBJECT
 
 public :
-    CBullet(Ecolor eColor, QGraphicsItem* pParent = nullptr);
+    CBullet(EColor eColor, QGraphicsItem* pParent = nullptr);
     EColor getColor() const;
     void setColor(EColor eColor);
 
@@ -87,7 +87,7 @@ private:
 class CPoints : public QGraphicsPixmapItem
 {
 public:
-    CPoints(Ecolor eColor, QGraphicsItem* pParent = nullptr);
+    CPoints(EColor eColor, QGraphicsItem* pParent = nullptr);
     void increaseScore();
     void decreaseScore();
     void decreaseHealth();
