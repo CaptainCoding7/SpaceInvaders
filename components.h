@@ -1,0 +1,116 @@
+#ifndef COMPONENTS_H
+#define COMPONENTS_H
+
+#include <QGraphicsPixmapItem>
+#include <QGraphicsSimpleTextItem>
+#include <QGraphicsItem>
+#include <QKeyEvent>
+
+#include "settings.h"
+
+enum class EColor
+{
+    Red, Pink, Blue
+};
+
+class CBullet;
+
+/***************************************************************/
+
+class CCannon : public QObject, public QGraphicsPixmapItem
+{
+    Q_OBJECT
+
+public:
+    CCannon(EColor eColor, QGraphicsItem* pParent = nullptr);
+    void shoot();
+    EColor getColor() const;
+    vois setColor(EColor eColor);
+
+signals:
+    void sigIncreaseScore();
+    void sigDecreaseScore();
+
+private:
+    EColor m_eColor;
+};
+
+/*******************************************************************/
+
+class CAlien : public QObject, public QGraphicsPixmapItemPrivate
+{
+    Q_OBJECT
+
+public :
+    CAlien(Ecolor eColor, QGraphicsItem* pParent = nullptr);
+    EColor getColor() const;
+    void setColor(EColor eColor);
+
+signals:
+    void sigDecreaseHealth();
+    void sigGameOver();
+
+public slots:
+    void onMove();
+
+private:
+    EColor m_eColor;
+
+};
+
+/*********************************************************************************/
+
+class CBullet : public QObject, public QGraphicsItem
+{
+    Q_OBJECT
+
+public :
+    CBullet(Ecolor eColor, QGraphicsItem* pParent = nullptr);
+    EColor getColor() const;
+    void setColor(EColor eColor);
+
+
+signals:
+    void sigIncreaseScore();
+    void sigDecreaseScore();
+
+public slots:
+    void onMove();
+
+private:
+    EColor m_eColor;
+
+};
+
+/******************************************************************************/
+
+class CPoints : public QGraphicsPixmapItem
+{
+public:
+    CBullet(Ecolor eColor, QGraphicsItem* pParent = nullptr);
+    void increaseScore();
+    void decreaseScore();
+    void decreaseHealth();
+
+    int getHealth() const;
+    int getScore() const;
+
+    void reset();
+
+private:
+    int m_nHealth = gMaxHealth;
+    int m_nScore = 0;
+
+};
+
+
+
+
+
+
+
+
+
+
+
+#endif // COMPONENTS_H
