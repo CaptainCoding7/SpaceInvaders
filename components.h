@@ -84,10 +84,10 @@ private:
 
 /******************************************************************************/
 
-class CPoints : public QGraphicsPixmapItem
+class CPoints : public QGraphicsTextItem
 {
 public:
-    CPoints(EColor eColor, QGraphicsItem* pParent = nullptr);
+    CPoints(QGraphicsItem* pParent = nullptr);
     void increaseScore();
     void decreaseScore();
     void decreaseHealth();
