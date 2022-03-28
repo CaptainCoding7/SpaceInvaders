@@ -126,24 +126,86 @@ void CAlien::onMove()
 /**********************************************************************/
 
 
-CBullet::CBullet(Ecolor eColor, QGraphicsItem *pParent)
+CBullet::CBullet(Ecolor eColor, QGraphicsItem *pParent): QGraphicsPixmapItem(pParent)
 {
+    setColor(eColor);
+    QTimer* pTimer = new QTimer(this);
+    connect(pTimer, &QTimer::timeout, this, &CBullet::onMove);
+    pTimer->start((gBulletSpeed));
 
 }
 
 EColor CBullet::getColor() const
 {
-
+    return m_eColor;
 }
 
 void CBullet::setColor(EColor eColor)
 {
+    m_eColor = eColor;
+
+    switch(eColor)
+    {
+        case eColor::Red:
+        {
+            QPixmap oPixmap(":/Ressources/RedBullet.png");
+            break;
+        }
+    case eColor::Pink:
+        {
+            QPixmap oPixmap(":/Ressources/PinkBullet.png");
+            break;
+        }
+    case eColor::Blue:
+        {
+            QPixmap oPixmap(":/Ressources/BlueBullet.png");
+            break;
+        }
+    }
+
+    setPixmap(oPixmap.scaled(QSize(40, 40), Qt::KeepAspectRatio));
 
 }
 
 void CBullet::onMove()
 {
 
+    /* Checking if we hit an alien
+     * If we do, it's removed and the score is increased
+     */
+    QList<QGraphicsItem*> listCollidingItem = collidingItems();
+    for (auto const pItem : listCollidingItem)
+    {
+        CAlien* pAlien = dynamic_cast<CAlien*>(pItem);
+        if(pAlien != nullptr)
+        {
+            if(pAlien->getColor() == getColor())
+            {
+                scene()->removeItem(pAlien);
+                scene()->removeItem(this);
+
+                emit sigIncreaseScore();
+                delete pAlien;
+                delete this;
+            }
+            else
+            {
+                emit sigDecreaseScore();
+                scene()->removeItem(this);
+                delete this;
+            }
+            return;
+        }
+    }
+
+    // change the poistion of the bullet
+    setPos(x(), y() - 10);
+
+    if(pos().y()<0)
+    {
+        scene()-> removeItem(this);
+        delete this;
+    }
 }
 
 /**********************************************************************/
