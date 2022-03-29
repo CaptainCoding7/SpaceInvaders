@@ -18,7 +18,7 @@ public:
     void checkPoints();
 
 protected:
-    void keyPressedEvent(QKeyEvent *pEvent) override;
+    void keyPressEvent(QKeyEvent *pEvent) override;
 
 public slots :
     void onCreateEnemy();

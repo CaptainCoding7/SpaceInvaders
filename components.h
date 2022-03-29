@@ -17,6 +17,9 @@ class CBullet;
 
 /***************************************************************/
 
+/*
+ * A class to manage the cannon
+ */
 class CCannon : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
@@ -84,6 +87,9 @@ private:
 
 /******************************************************************************/
 
+/*
+ * A class to manage score and health
+ */
 class CPoints : public QGraphicsTextItem
 {
 public:

@@ -3,6 +3,9 @@
 
 #include "components.h"
 
+
+/**********************************************************************/
+
 CCannon::CCannon(EColor eColor, QGraphicsItem *pParent) : QGraphicsPixmapItem(pParent)
 {
     setColor((eColor));
@@ -14,9 +17,10 @@ void CCannon::shoot()
     connect(pBullet, &CBullet::sigIncreaseScore, this, &CCannon::sigIncreaseScore);
     connect(pBullet, &CBullet::sigDecreaseScore, this, &CCannon::sigDecreaseScore);
 
+    // the bullet position is changed
     pBullet->setPos(x()+27, y()-10);
+    // we add the bullet to the scene
     scene()->addItem(pBullet);
-
 
 }
 
@@ -107,18 +111,23 @@ void CAlien::setColor(EColor eColor)
 
 void CAlien::onMove()
 {
+    // the alien position is changed
     setPos(x(), y() + 5);
+    // if the alien reached the ground
     if(pos().y() >= (scene()->height() - gCannonSize.height()))
     {
+        // ... it is removed
         scene()->removeItem(this);
+        // we lose health
         emit sigDecreaseHealth();
         delete this;
 
     }
-
+    // for all items that collides with the alien
     QList<QGraphicsItem*> listCollidingItem = collidingItems();
     for (auto const pItem : listCollidingItem)
     {
+        // ... if it's the cannon, we lose !
         if(dynamic_cast<CCannon*>(pItem))
             emit sigGameOver();
     }
@@ -178,7 +187,7 @@ void CBullet::onMove()
 {
 
     /* Checking if we hit an alien
-     * If we do, it's removed and the score is increased
+     * If we do, it's removed and
      */
     QList<QGraphicsItem*> listCollidingItem = collidingItems();
     for (auto const pItem : listCollidingItem)
@@ -186,17 +195,19 @@ void CBullet::onMove()
         CAlien* pAlien = dynamic_cast<CAlien*>(pItem);
         if(pAlien != nullptr)
         {
+            // if we touch an alien with the right color
             if(pAlien->getColor() == getColor())
             {
                 scene()->removeItem(pAlien);
                 scene()->removeItem(this);
-
+                //the score is increased
                 emit sigIncreaseScore();
                 delete pAlien;
                 delete this;
             }
             else
             {
+                // else, we lose points
                 emit sigDecreaseScore();
                 scene()->removeItem(this);
                 delete this;
@@ -205,9 +216,9 @@ void CBullet::onMove()
         }
     }
 
-    // change the poistion of the bullet
+    // change the position of the bullet
     setPos(x(), y() - 10);
-
+    // removing it if it goes too far
     if(pos().y()<0)
     {
         scene()-> removeItem(this);
