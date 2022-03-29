@@ -5,6 +5,8 @@
 #include <QGraphicsView>
 #include <QKeyEvent>
 #include <QTimer>
+#include <QMessageBox>
+#include <QDebug>
 
 #include <components.h>
 
@@ -31,6 +33,7 @@ public slots :
 private:
     CCannon *m_pCannon = nullptr;
     CPoints *m_pPoints = nullptr;
+    bool waitAnswer = false;
     QSize m_oScreenSize;
 
 };

@@ -74,6 +74,7 @@ public :
 
 signals:
     void sigDecreaseHealth();
+    void sigDecreaseScore();
     void sigGameOver();
 
 public slots:

@@ -40,13 +40,13 @@ void CspaceInvaders::run()
     connect(pTimer, &QTimer::timeout, this, &CspaceInvaders::onCreateEnemy);
     pTimer->start(2000);
 
-
 }
 
 void CspaceInvaders::checkPoints()
 {
     // we check if the lose conditions are met
-    if((m_pPoints->getScore() < 0) || (m_pPoints->getHealth() <= 0))
+    // AND if we are not waiting for the user answer
+    if((m_pPoints->getScore() < 0 || (m_pPoints->getHealth() <= 0)))
     {
         m_pPoints->reset();
         onGameOver();
@@ -101,7 +101,7 @@ void CspaceInvaders::onCreateEnemy()
 
     scene()->addItem(pAlien);
 
-    connect(pAlien, &CAlien::sigGameOver, this, &CspaceInvaders::onGameOver);
+    connect(pAlien, &CAlien::sigDecreaseScore, this, &CspaceInvaders::onDecreaseScore);
     connect(pAlien, &CAlien::sigDecreaseHealth, this, &CspaceInvaders::onDecreaseHealth);
 
 }
@@ -126,5 +126,35 @@ void CspaceInvaders::onDecreaseHealth()
 
 void CspaceInvaders::onGameOver()
 {
-    close();
+    /*
+
+    QList<QGraphicsItem*> items = scene()->items();
+    foreach( QGraphicsItem *item, items )
+    {
+    item->hide();
+
+    }
+    */
+    //scene()->clear();
+    if(!waitAnswer)
+    {
+        waitAnswer=true;
+        QMessageBox msgBox;
+        msgBox.setText("You lose ! :-/");
+        msgBox.addButton("Play Again!",QMessageBox::YesRole);
+        msgBox.addButton("Quit",QMessageBox::NoRole);
+        //msgBox.setDefaultButton("PlayAgain");
+        int ret = msgBox.exec();
+        //qDebug() << ret;
+
+        if(ret==0)
+        {
+            waitAnswer=false;
+            this->run();
+        }
+        else if(ret==1)
+        {
+            close();
+        }
+    }
 }

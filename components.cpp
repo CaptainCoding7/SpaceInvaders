@@ -1,5 +1,6 @@
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QDebug>
 
 #include "components.h"
 
@@ -117,7 +118,7 @@ void CAlien::onMove()
         // ... it is removed
         scene()->removeItem(this);
         // we lose health
-        emit sigDecreaseHealth();
+        emit sigDecreaseScore();
         delete this;
 
     }
@@ -125,9 +126,14 @@ void CAlien::onMove()
     QList<QGraphicsItem*> listCollidingItem = collidingItems();
     for (auto const pItem : listCollidingItem)
     {
-        // ... if it's the cannon, we lose !
+        // ... if it's the cannon, we lose health !
         if(dynamic_cast<CCannon*>(pItem))
-            emit sigGameOver();
+        {
+            qDebug() << "Collided with cannon !";
+            scene()->removeItem(this);
+            emit sigDecreaseHealth();
+            delete this;
+        }
     }
 
 
@@ -248,7 +254,7 @@ void CPoints::decreaseScore()
 
 void CPoints::decreaseHealth()
 {
-    m_nScore--;
+    m_nHealth--;
     setPlainText(QString("Health = ") + QString::number(m_nHealth) + "\n"
                  + QString("Score : ") + QString::number(m_nScore));
 }
