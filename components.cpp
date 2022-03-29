@@ -240,7 +240,7 @@ CPoints::CPoints(QGraphicsItem *pParent):QGraphicsTextItem(pParent)
 
 void CPoints::increaseScore()
 {
-    m_nScore+=50;
+    m_nScore+=30;
     setPlainText(QString("Health = ") + QString::number(m_nHealth) + "\n"
                  + QString("Score : ") + QString::number(m_nScore));
 }

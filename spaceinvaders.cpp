@@ -20,7 +20,7 @@ CspaceInvaders::CspaceInvaders(QSize oScreenSize, QWidget *pParent):
 void CspaceInvaders::run()
 {
     scene()->clear();
-    setCursor(Qt::BlankCursor);
+    setCursor(Qt::ArrowCursor);
 
     // creating the cannon
     m_pCannon = new CCannon(EColor::Red);
