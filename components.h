@@ -104,7 +104,7 @@ public:
 
 private:
     int m_nHealth = gMaxHealth;
-    int m_nScore = 0;
+    int m_nScore = 50;
 
 };
 

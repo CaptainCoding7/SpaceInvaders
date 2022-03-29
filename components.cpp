@@ -57,6 +57,7 @@ void CCannon::setColor(EColor eColor)
         {
             QPixmap oPixmap(":/Resources/RedCannon.png");
             setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+            m_eColor=EColor::Red;
             break;
         }
 
@@ -272,7 +273,7 @@ int CPoints::getScore() const
 void CPoints::reset()
 {
     m_nHealth = gMaxHealth;
-    m_nScore = 0;
+    m_nScore = 50;
     setPlainText(QString("Health = ") + QString::number(m_nHealth) + "\n"
                  + QString("Score : ") + QString::number(m_nScore));
 

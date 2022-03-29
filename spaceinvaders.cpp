@@ -11,7 +11,7 @@ CspaceInvaders::CspaceInvaders(QSize oScreenSize, QWidget *pParent):
     setScene((pScene));
     pScene->setSceneRect(0, 0,  m_oScreenSize.width(), m_oScreenSize.height());
 
-    setBackgroundBrush((QBrush(QImage(":/Ressources/SpaceInvadersBg.jpg"))));
+    setBackgroundBrush((QBrush(QImage(":/Resources/SpaceInvadersBg.jpg"))));
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setCursor(Qt::PointingHandCursor);
@@ -39,6 +39,8 @@ void CspaceInvaders::run()
 
     QTimer* pTimer = new QTimer(this);
     connect(pTimer, &QTimer::timeout, this, &CspaceInvaders::onCreateEnemy);
+    pTimer->start(2000);
+
 
 }
 
@@ -107,20 +109,23 @@ void CspaceInvaders::onCreateEnemy()
 
 void CspaceInvaders::onIncreaseScore()
 {
-
+    m_pPoints->increaseScore();
+    checkPoints();
 }
 
 void CspaceInvaders::onDecreaseScore()
 {
-
+    m_pPoints->decreaseScore();
+    checkPoints();
 }
 
 void CspaceInvaders::onDecreaseHealth()
 {
-
+    m_pPoints->decreaseHealth();
+    checkPoints();
 }
 
 void CspaceInvaders::onGameOver()
 {
-
+    close();
 }
