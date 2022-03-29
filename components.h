@@ -108,6 +108,4 @@ private:
 
 };
 
-
-
 #endif // COMPONENTS_H

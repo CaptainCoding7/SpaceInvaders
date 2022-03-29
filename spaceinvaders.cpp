@@ -1,7 +1,6 @@
 #include "spaceinvaders.h"
 
 
-
 CspaceInvaders::CspaceInvaders(QSize oScreenSize, QWidget *pParent):
     QGraphicsView(pParent),
     m_oScreenSize(oScreenSize)

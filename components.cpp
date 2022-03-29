@@ -32,38 +32,35 @@ EColor CCannon::getColor() const
 void CCannon::setColor(EColor eColor)
 {
     m_eColor = eColor;
+    QPixmap oPixmap;
 
     switch(eColor)
     {
     case EColor::Red:
         {
-            QPixmap oPixmap(":/Resources/RedCannon.png");
-            setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+            oPixmap.load(":/Resources/RedCannon.png");
             break;
         }
     case EColor::Pink:
         {
-            QPixmap oPixmap(":/Resources/PinkCannon.png");
-            setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+            oPixmap.load(":/Resources/PinkCannon.png");
             break;
         }
     case EColor::Blue:
         {
-            QPixmap oPixmap(":/Resources/BlueCannon.png");
-            setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+            oPixmap.load(":/Resources/BlueCannon.png");
             break;
         }
     default:
         {
-            QPixmap oPixmap(":/Resources/RedCannon.png");
-            setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+            oPixmap.load(":/Resources/RedCannon.png");
             m_eColor=EColor::Red;
             break;
         }
-
     }
 
-    //setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+    setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+
 
 }
 
@@ -85,28 +82,28 @@ EColor CAlien::getColor() const
 void CAlien::setColor(EColor eColor)
 {
     m_eColor = eColor;
+    QPixmap oPixmap;
 
     switch(eColor)
     {
         case EColor::Red:
             {
-                QPixmap oPixmap(":/Resources/RedAlien.png");
-                setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+                oPixmap.load(":/Resources/RedAlien.png");
                 break;
             }
         case EColor::Pink:
             {
-                QPixmap oPixmap(":/Resources/PinkAlien.png");
-                setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+                oPixmap.load(":/Resources/PinkAlien.png");
                 break;
             }
         case EColor::Blue:
             {
-                QPixmap oPixmap(":/Resources/BlueAlien.png");
-                setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
+                oPixmap.load(":/Resources/BlueAlien.png");
                 break;
             }
     }
+
+    setPixmap(oPixmap.scaled(QSize(100, 100), Qt::KeepAspectRatio));
 
 }
 
@@ -156,31 +153,27 @@ EColor CBullet::getColor() const
 void CBullet::setColor(EColor eColor)
 {
     m_eColor = eColor;
-    //QPixmap oPixmap();
-    //oPixmap.data
+    QPixmap oPixmap;
 
     switch(eColor)
     {
         case EColor::Red:
             {
-                QPixmap oPixmap(":/Resources/RedBullet.png");
-                setPixmap(oPixmap.scaled(QSize(40, 40), Qt::KeepAspectRatio));
+                oPixmap.load(":/Resources/RedBullet.png");
                 break;
             }
         case EColor::Pink:
             {
-                QPixmap oPixmap(":/Resources/PinkBullet.png");
-                setPixmap(oPixmap.scaled(QSize(40, 40), Qt::KeepAspectRatio));
+                oPixmap.load(":/Resources/PinkBullet.png");
                 break;
             }
         case EColor::Blue:
             {
-                QPixmap oPixmap(":/Resources/BlueBullet.png");
-                setPixmap(oPixmap.scaled(QSize(40, 40), Qt::KeepAspectRatio));
+                oPixmap.load(":/Resources/BlueBullet.png");
                 break;
             }
     }
-
+    setPixmap(oPixmap.scaled(QSize(40, 40), Qt::KeepAspectRatio));
 
 }
 
