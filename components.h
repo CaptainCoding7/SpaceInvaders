@@ -13,7 +13,30 @@ enum class EColor
     Red, Pink, Blue
 };
 
-class CBullet;
+//class CBullet;
+/*********************************************************************************/
+
+class CBullet : public QObject, public QGraphicsPixmapItem
+{
+    Q_OBJECT
+
+public :
+    CBullet(EColor eColor, QGraphicsItem* pParent = nullptr);
+    EColor getColor() const;
+    void setColor(EColor eColor);
+
+
+signals:
+    void sigIncreaseScore();
+    void sigDecreaseScore();
+
+public slots:
+    void onMove();
+
+private:
+    EColor m_eColor;
+
+};
 
 /***************************************************************/
 
@@ -52,30 +75,6 @@ public :
 signals:
     void sigDecreaseHealth();
     void sigGameOver();
-
-public slots:
-    void onMove();
-
-private:
-    EColor m_eColor;
-
-};
-
-/*********************************************************************************/
-
-class CBullet : public QObject, public QGraphicsItem
-{
-    Q_OBJECT
-
-public :
-    CBullet(EColor eColor, QGraphicsItem* pParent = nullptr);
-    EColor getColor() const;
-    void setColor(EColor eColor);
-
-
-signals:
-    void sigIncreaseScore();
-    void sigDecreaseScore();
 
 public slots:
     void onMove();

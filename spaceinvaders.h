@@ -20,6 +20,7 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *pEvent) override;
 
+    // the slots are used when a signal is emitted (using the connect function)
 public slots :
     void onCreateEnemy();
     void onIncreaseScore();
